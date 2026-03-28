@@ -22,9 +22,12 @@ from bs4 import BeautifulSoup
 # Configuration - Primary sources first (Kleinanzeigen), then secondary
 URLS_PRIMARY = [
     "https://www.kleinanzeigen.de/s-wohnung-kaufen/fronreute/c196l9125",
-    "https://www.kleinanzeigen.de/s-wohnung-kaufen/baienfurt/c196l8271",
-    "https://www.kleinanzeigen.de/s-wohnung-kaufen/baindt/c196l8272",
-    "https://www.kleinanzeigen.de/s-wohnung-kaufen/schlier/c196l8273",
+    "https://www.kleinanzeigen.de/s-wohnung-kaufen/weingarten/c196l8271",
+    "https://www.kleinanzeigen.de/s-wohnung-kaufen/baienfurt/c196l8272",
+    "https://www.kleinanzeigen.de/s-wohnung-kaufen/baindt/c196l8273",
+    "https://www.kleinanzeigen.de/s-wohnung-kaufen/schlier/c196l9127",
+    "https://www.kleinanzeigen.de/s-wohnung-kaufen/berg-ravensburg/c196l9126",
+    "https://www.kleinanzeigen.de/s-wohnung-kaufen/koepfingen/c196l9128",
 ]
 
 URLS_SECONDARY = [
