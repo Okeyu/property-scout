@@ -374,7 +374,7 @@ def format_email_html(listings: list[Listing], total_matching: int) -> str:
         <p>No <strong>new</strong> apartments matching your criteria this week.</p>
         <p><em>({total_matching} total matching listings exist, but all were previously sent)</em></p>
         <p><strong>Criteria:</strong> 3+ bedrooms, under €350,000, over 80m²</p>
-        <p><strong>Location:</strong> Fronreute Staig area, Germany</p>
+        <p><strong>Locations:</strong> Fronreute, Weingarten, Baienfurt, Baindt, Schlier, Berg, Köpfingen</p>
         </body>
         </html>
         """
@@ -402,7 +402,7 @@ def format_email_html(listings: list[Listing], total_matching: int) -> str:
     <h2>Property Scout - Weekly Report</h2>
     <p>Found <strong>{len(listings)} NEW</strong> apartments matching your criteria:</p>
     <p><strong>Criteria:</strong> 3+ bedrooms, under €350,000, over 80m²</p>
-    <p><strong>Location:</strong> Fronreute Staig area, Germany</p>
+    <p><strong>Locations:</strong> Fronreute, Weingarten, Baienfurt, Baindt, Schlier, Berg, Köpfingen</p>
     <p><strong>Date:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M")}</p>
     <p><em>Note: Kleinanzeigen listings are highlighted as the primary source.</em></p>
 
