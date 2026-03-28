@@ -39,7 +39,12 @@ MIN_ROOMS = 3
 
 GMAIL_USER = os.environ.get("GMAIL_USER")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD")
-RECIPIENT_EMAIL = os.environ.get("RECIPIENT_EMAIL", GMAIL_USER)
+
+# Multiple recipients: comma-separated in env var, or defaults to GMAIL_USER
+_recipients_env = os.environ.get("RECIPIENT_EMAILS", "")
+RECIPIENT_EMAILS = [e.strip() for e in _recipients_env.split(",") if e.strip()] or (
+    [GMAIL_USER] if GMAIL_USER else []
+)
 
 # File to track seen listings (persists between runs)
 SEEN_LISTINGS_FILE = Path(__file__).parent / "seen_listings.json"
@@ -429,10 +434,14 @@ def send_email(listings: list[Listing], total_matching: int) -> None:
             print(f"    URL: {l.url}")
         return
 
+    if not RECIPIENT_EMAILS:
+        print("ERROR: No recipient emails configured.")
+        return
+
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"Property Scout: {len(listings)} NEW apartments - {datetime.now().strftime('%Y-%m-%d')}"
     msg["From"] = GMAIL_USER
-    msg["To"] = RECIPIENT_EMAIL
+    msg["To"] = ", ".join(RECIPIENT_EMAILS)
 
     html_content = format_email_html(listings, total_matching)
     msg.attach(MIMEText(html_content, "html"))
@@ -441,8 +450,8 @@ def send_email(listings: list[Listing], total_matching: int) -> None:
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
-            server.sendmail(GMAIL_USER, RECIPIENT_EMAIL, msg.as_string())
-        print(f"Email sent successfully to {RECIPIENT_EMAIL}")
+            server.sendmail(GMAIL_USER, RECIPIENT_EMAILS, msg.as_string())
+        print(f"Email sent successfully to {', '.join(RECIPIENT_EMAILS)}")
     except Exception as e:
         print(f"Failed to send email: {e}")
 

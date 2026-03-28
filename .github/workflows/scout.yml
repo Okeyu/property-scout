@@ -35,7 +35,7 @@ jobs:
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          RECIPIENT_EMAILS: "${{ secrets.GMAIL_USER }},ashiminimota@yahoo.com"
         run: python scout.py
 
       - name: Commit seen listings update
