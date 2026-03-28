@@ -70,6 +70,11 @@ class Listing:
     location: str = ""
 
     def matches_criteria(self) -> bool:
+        # Filter out swap listings and zero-price listings
+        if "tausch" in self.title.lower():
+            return False
+        if self.price <= 0:
+            return False
         return (
             self.price <= MAX_PRICE
             and self.size >= MIN_SIZE
