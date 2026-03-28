@@ -23,14 +23,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Download seen listings cache
-        uses: actions/cache@v4
-        with:
-          path: seen_listings.json
-          key: seen-listings-${{ github.run_id }}
-          restore-keys: |
-            seen-listings-
-
       - name: Run Property Scout
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
